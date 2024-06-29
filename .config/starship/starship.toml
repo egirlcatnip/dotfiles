@@ -1,0 +1,149 @@
+[character]
+success_symbol = "[ ](bold green)"
+error_symbol = "[ ](bold red)"
+
+[directory]
+style = "blue bold"
+
+[package]
+version_format = "${raw}"
+format = "is [$version]($style) "
+style = "maroon bold"
+
+[git_branch]
+always_show_remote = false
+format = "on [$branch(:$remote_branch)]($style) "
+style = "bold red"
+
+
+[bun]
+format = "[$symbol]($style)"
+
+[buf]
+format = "[$symbol]($style)"
+
+[cmake]
+format = "[$symbol]($style)"
+
+[cobol]
+format = "[$symbol]($style)"
+
+[crystal]
+format = "[$symbol]($style)"
+
+[daml]
+format = "[$symbol]($style)"
+
+[dart]
+format = "[$symbol]($style)"
+
+[deno]
+format = "[$symbol]($style)"
+
+[dotnet]
+format = "[$symbol(🎯 $tfm )]($style)"
+
+[elixir]
+format = '[$symbol]($style)'
+
+[elm]
+format = '[$symbol]($style)'
+
+[erlang]
+format = '[$symbol]($style)'
+
+[fennel]
+format = '[$symbol]($style)'
+
+[gleam]
+format = '[$symbol]($style)'
+
+[golang]
+format = '[$symbol]($style)'
+
+[gradle]
+format = '[$symbol]($style)'
+
+[haxe]
+format = '[$symbol]($style)'
+
+[helm]
+format = '[$symbol]($style)'
+
+[java]
+format = '[$symbol]($style)'
+
+[julia]
+format = '[$symbol]($style)'
+
+[kotlin]
+format = '[$symbol]($style)'
+
+[lua]
+format = '[$symbol]($style)'
+
+[meson]
+format = '[$symbol]($style)'
+
+[nim]
+format = '[$symbol]($style)'
+
+[nodejs]
+format = '[$symbol]($style)'
+
+[ocaml]
+format = '[$symbol(\($switch_indicator$switch_name\) )]($style)'
+
+[opa]
+format = '[$symbol]($style)'
+
+[perl]
+format = '[$symbol]($style)'
+
+[php]
+format = '[$symbol]($style)'
+
+[pulumi]
+format = '[$symbol$stack]($style)'
+
+[purescript]
+format = '[$symbol]($style)'
+
+[python]
+format = '[$symbol]($style)'
+
+[quarto]
+format = '[$symbol]($style)'
+
+[raku]
+format = '[$symbol]($style)'
+
+[red]
+format = '[$symbol]($style)'
+
+[rlang]
+format = '[$symbol]($style)'
+
+[ruby]
+format = '[$symbol]($style)'
+
+[rust]
+format = '[$symbol]($style)'
+
+[solidity]
+format = '[$symbol]($style)'
+
+[typst]
+format = '[$symbol]($style)'
+
+[swift]
+format = '[$symbol]($style)'
+
+[vagrant]
+format = '[$symbol]($style)'
+
+[vlang]
+format = '[$symbol]($style)'
+
+[zig]
+format = '[$symbol]($style)'

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "host",
+    "uptime",
+    "kernel",
+    "de",
+    "separator",
+    "cpu",
+    "gpu",
+    "separator"
+  ],
+  "logo": {
+    // "type": "small",
+    "type": "none",
+    "separate": true,
+    "padding": {
+      "left": 2
+    }
+  },
+  "display": {
+    "hideCursor": true,
+    "showErrors": true,
+    "binaryPrefix": "iec",
+    "size": {
+      "ndigits": 0
+    }
+  }
+}

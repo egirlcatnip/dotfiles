@@ -1,0 +1,22 @@
+// Created by @egirlcatnip with <3
+xkb_symbols "egirlcattype" { 
+  include "sk(basic)"
+  
+  key <TLDE>  { [ semicolon,  asciitilde,     grave,       Nosymbol ] };
+
+  // Next to P ->
+  key <AD11>  { [parenleft,   bracketleft,    braceleft,   NoSymbol ] };
+  key <AD12>  { [parenright,  bracketright,   braceright,  NoSymbol ] };
+  
+  // Above Enter
+  key <BKSL>  { [slash,       backslash,      bar,         NoSymbol ] };
+  
+  //ô, " and $
+  key <AC10>  { [ocircumflex, quotedbl,       dollar,      NoSymbol ] };
+  
+  // ä, ! and '
+  key <AC11>  { [adiaeresis,  exclam,         apostrophe,  NoSymbol ] };
+  
+  // ' on P
+  key <AD10>  { [p,           P,              apostrophe,  NoSymbol ] };
+};
