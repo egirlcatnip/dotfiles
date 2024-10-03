@@ -74,7 +74,7 @@
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.cursorSurroundingLines": 10,
     "editor.cursorWidth": 2,
-    "editor.fontFamily": "MonoCraft Nerd Font",
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
