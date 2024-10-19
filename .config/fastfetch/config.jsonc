@@ -16,7 +16,7 @@
   "logo": {
     // "type": "small",
     "type": "none",
-    "separate": true,
+    "position": "right",
     "padding": {
       "left": 2
     }
@@ -24,9 +24,10 @@
   "display": {
     "hideCursor": true,
     "showErrors": true,
-    "binaryPrefix": "iec",
+    
     "size": {
-      "ndigits": 0
+      "ndigits": 0,
+      "binaryPrefix": "iec"
     }
   }
 }

@@ -1,9 +1,20 @@
+add_newline = false
+
+[shell]
+xonsh_indicator = "🐚"
+fish_indicator = "🐟"
+style = "black bold"
+format = "[$indicator]($style)"
+disabled = false
+
+
 [character]
-success_symbol = "[ ](bold green)"
-error_symbol = "[ ](bold red)"
+success_symbol = "[  ](bold green)"
+error_symbol = "[  ](bold red)"
 
 [directory]
 style = "blue bold"
+truncation_length = 0
 
 [package]
 version_format = "${raw}"
@@ -15,6 +26,8 @@ always_show_remote = false
 format = "on [$branch(:$remote_branch)]($style) "
 style = "bold red"
 
+[c]
+commands = [['clang', '--version'], ['cc', '--version'], ['gcc', '--version']]
 
 [bun]
 format = "[$symbol]($style)"
