@@ -1,0 +1,29 @@
+{
+	"name": "rust-flash-snippets",
+	"displayName": "Rust Flash Snippets",
+	"description": "A comprehensive set of Rust snippets for everyone",
+	"version": "3.1.1",
+	"publisher": "lorenzopirro",
+	"icon": "images/rust_programming_crab_sea.png",
+	"engines": {
+		"vscode": "^1.51.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "rust",
+				"path": "./snippets/snippets.code-snippets"
+			}
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Metalymph/rust-flash-snippets.git"
+	},
+	"__metadata": {
+		"size": 768186
+	}
+}

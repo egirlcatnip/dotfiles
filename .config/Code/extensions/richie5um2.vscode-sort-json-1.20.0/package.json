@@ -1,0 +1,242 @@
+{
+	"name": "vscode-sort-json",
+	"version": "1.20.0",
+	"description": "Sorts the keys within JSON objects",
+	"publisher": "richie5um2",
+	"author": "Rich Somerfield",
+	"license": "MIT",
+	"homepage": "https://github.com/richie5um/vscode-sort-json",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/richie5um/vscode-sort-json"
+	},
+	"bugs": {
+		"url": "https://github.com/richie5um/vscode-sort-json/issues"
+	},
+	"main": "lib/index.js",
+	"scripts": {
+		"test": "mocha test/internal"
+	},
+	"dependencies": {
+		"comment-json": "^4.1.0",
+		"json5": "^0.5.0",
+		"lodash": "^4.17.13"
+	},
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"vscode": "0.10.x",
+		"mocha": "~2.3.3"
+	},
+	"displayName": "Sort JSON objects",
+	"icon": "resources/Icon.png",
+	"engines": {
+		"vscode": "0.10.x"
+	},
+	"categories": [
+		"Other"
+	],
+	"contributors": [
+		"Rich Somerfield (https://github.com/richie5um)",
+		"Jeff Dickey (https://github.com/jdxcode)"
+	],
+	"activationEvents": [
+		"onCommand:sortJSON.sortJSON",
+		"onCommand:sortJSON.sortJSONReverse",
+		"onCommand:sortJSON.sortJSONKeyLength",
+		"onCommand:sortJSON.sortJSONKeyLengthReverse",
+		"onCommand:sortJSON.sortJSONAlphaNum",
+		"onCommand:sortJSON.sortJSONAlphaNumReverse",
+		"onCommand:sortJSON.sortJSONValues",
+		"onCommand:sortJSON.sortJSONValuesReverse",
+		"onCommand:sortJSON.sortJSONType",
+		"onCommand:sortJSON.sortJSONTypeReverse",
+		"onLanguage:json"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "sortJSON.sortJSON",
+				"title": "Sort JSON"
+			},
+			{
+				"command": "sortJSON.sortJSONReverse",
+				"title": "Sort JSON (reverse)"
+			},
+			{
+				"command": "sortJSON.sortJSONKeyLength",
+				"title": "Sort JSON (by key length)"
+			},
+			{
+				"command": "sortJSON.sortJSONKeyLengthReverse",
+				"title": "Sort JSON (by reverse key length)"
+			},
+			{
+				"command": "sortJSON.sortJSONAlphaNum",
+				"title": "Sort JSON (by alphanum)"
+			},
+			{
+				"command": "sortJSON.sortJSONAlphaNumReverse",
+				"title": "Sort JSON (by reverse alphanum)"
+			},
+			{
+				"command": "sortJSON.sortJSONValues",
+				"title": "Sort JSON (by values)"
+			},
+			{
+				"command": "sortJSON.sortJSONValuesReverse",
+				"title": "Sort JSON (by reverse values)"
+			},
+			{
+				"command": "sortJSON.sortJSONType",
+				"title": "Sort JSON (by type)"
+			},
+			{
+				"command": "sortJSON.sortJSONTypeReverse",
+				"title": "Sort JSON (by reverse type)"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"properties": {
+				"sortJSON.contextMenu": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"sortJSON": {
+							"type": "boolean"
+						},
+						"sortJSONReverse": {
+							"type": "boolean"
+						},
+						"sortJSONKeyLength": {
+							"type": "boolean"
+						},
+						"sortJSONKeyLengthReverse": {
+							"type": "boolean"
+						},
+						"sortJSONAlphaNum": {
+							"type": "boolean"
+						},
+						"sortJSONAlphaNumReverse": {
+							"type": "boolean"
+						},
+						"sortJSONValues": {
+							"type": "boolean"
+						},
+						"sortJSONValuesReverse": {
+							"type": "boolean"
+						},
+						"sortJSONType": {
+							"type": "boolean"
+						},
+						"sortJSONTypeReverse": {
+							"type": "boolean"
+						}
+					},
+					"default": {
+						"sortJSON": true,
+						"sortJSONReverse": true,
+						"sortJSONKeyLength": true,
+						"sortJSONKeyLengthReverse": true,
+						"sortJSONAlphaNum": true,
+						"sortJSONAlphaNumReverse": true,
+						"sortJSONValues": true,
+						"sortJSONValuesReverse": true,
+						"sortJSONType": true,
+						"sortJSONTypeReverse": true
+					},
+					"description": "Which editor context menu commands to show"
+				},
+				"sortJSON.orderOverride": {
+					"type": "array",
+					"default": [],
+					"description": "Settings to override the sort order (i.e. to be at the start of the order)"
+				},
+				"sortJSON.orderUnderride": {
+					"type": "array",
+					"default": [],
+					"description": "Settings to underride the sort order (i.e. to be at the end of the order)"
+				},
+				"sortJSON.excludedFiles": {
+					"type": "array",
+					"default": [
+						"package.json"
+					],
+					"description": "Settings to exclude some files for which the sortJSON shouldn't get triggered"
+				},
+				"sortJSON.excludedPaths": {
+					"type": "array",
+					"default": [],
+					"description": "Settings to exclude some paths for which the sortJSON shouldn't get triggered"
+				}
+			}
+		},
+		"menus": {
+			"editor/context": [
+				{
+					"command": "sortJSON.sortJSON",
+					"group": "7_modification",
+					"title": "Sort JSON",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSON"
+				},
+				{
+					"command": "sortJSON.sortJSONReverse",
+					"group": "7_modification",
+					"title": "Sort JSON (reverse)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONReverse"
+				},
+				{
+					"command": "sortJSON.sortJSONKeyLength",
+					"group": "7_modification",
+					"title": "Sort JSON (by key length)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONKeyLength"
+				},
+				{
+					"command": "sortJSON.sortJSONKeyLengthReverse",
+					"group": "7_modification",
+					"title": "Sort JSON (by reverse key length)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONKeyLengthReverse"
+				},
+				{
+					"command": "sortJSON.sortJSONAlphaNum",
+					"group": "7_modification",
+					"title": "Sort JSON (by alphanum)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONAlphaNum"
+				},
+				{
+					"command": "sortJSON.sortJSONAlphaNumReverse",
+					"group": "7_modification",
+					"title": "Sort JSON (by reverse alphanum)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONAlphaNumReverse"
+				},
+				{
+					"command": "sortJSON.sortJSONValues",
+					"group": "7_modification",
+					"title": "Sort JSON (by values)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONValues"
+				},
+				{
+					"command": "sortJSON.sortJSONValuesReverse",
+					"group": "7_modification",
+					"title": "Sort JSON (by reverse values)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONValuesReverse"
+				},
+				{
+					"command": "sortJSON.sortJSONType",
+					"group": "7_modification",
+					"title": "Sort JSON (by type)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONType"
+				},
+				{
+					"command": "sortJSON.sortJSONTypeReverse",
+					"group": "7_modification",
+					"title": "Sort JSON (by reverse type)",
+					"when": "editorLangId =~ /(json|jsonc)/ && config.sortJSON.contextMenu.sortJSONTypeReverse"
+				}
+			]
+		}
+	},
+	"__metadata": {
+		"size": 2276848
+	}
+}
