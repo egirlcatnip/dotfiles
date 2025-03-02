@@ -6202,12 +6202,10 @@
 
         <variant>
           <configItem>
-            <name>cattype</name>
-            <description>Slovak (cattype)</description>
+            <name>egirlcattype</name>
+            <description>Slovak (egirlcattype)</description>
           </configItem>
         </variant>
-
-
 
         <variant>
           <configItem>
