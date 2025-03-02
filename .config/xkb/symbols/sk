@@ -177,6 +177,6 @@ xkb_symbols "egirlcattype" {
   key <AD10>  { [p,           P,              apostrophe,  NoSymbol ] };
 
   // Right of Left Shift
-  key <BKSL>  { [slash,       backslash,      bar,         NoSymbol ] };
+  key <LSGT>  { [slash,       backslash,      bar,         NoSymbol ] };
 
 };
