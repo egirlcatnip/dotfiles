@@ -1,0 +1,37 @@
+config nu
+exit
+nu
+config nu
+exit
+config env 
+exit
+nu
+exit
+config env
+exit
+mkdir ~/.cache/starship<\n>starship init nu | save -f ~/.cache/starship/init.nu
+config env
+clear
+ls
+xonsh
+exit
+clear
+exit
+clear
+clear --help
+clear --all
+clear
+clear --all
+config nu
+config env
+alias
+alias --help
+clear
+starship config
+exit
+ls
+exit
+l
+clear
+ls
+exit

@@ -1,0 +1,8 @@
+--reverse
+--bind=ctrl-i:down,btab:up,ctrl-space:toggle
+--cycle
+--border="rounded"
+--marker="("
+--pointer=">"
+--info="right"
+--color=bg:-1,bg+:-1,selected-bg:-1,preview-bg:-1,fg:-1,fg+:-1,selected-fg:-1,preview-fg:-1,hl:2,hl+:2,selected-hl:-1,border:-1,prompt:-1,marker:1,pointer:5,info:5,header:-1,query:-1,disabled:-1,label:1
