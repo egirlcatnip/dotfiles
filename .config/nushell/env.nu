@@ -5,7 +5,7 @@ source "~/.cache/starship/starship.nu"
 # Environment variables
 $env.EDITOR = 'micro'
 $env.BINSTALL_NO_CONFIRM = "true"
-$env.STARSHIP_CONFIG = '.config/starship_tty.toml'
+$env.STARSHIP_CONFIG = '~/.config/starship_tty.toml' | path expand
 
 # Path management
 def --env append_to_path [new_path: string] {
@@ -31,6 +31,6 @@ if $env.TERM == "linux" {
     ;
 } else {
     # In graphical terminal
-    $env.STARSHIP_CONFIG = '.config/starship.toml'
+    $env.STARSHIP_CONFIG = '~/.config/starship.toml' | path expand
     $env.EDITOR = 'codium'
 }
