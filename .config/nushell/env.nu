@@ -9,7 +9,7 @@ $env.STARSHIP_CONFIG = '.config/starship_tty.toml'
 
 # Path management
 def --env append_to_path [new_path: string] {
-    $env.PATH = ($env.PATH | split row ":" | append $new_path |path expand | str join ":")
+    $env.PATH = ($env.PATH | split row ":" | append $new_path | path expand | str join ":")
     $env.PATH = ($env.PATH | split row ":" | collect)
 }
 
