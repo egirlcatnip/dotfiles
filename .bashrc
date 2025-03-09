@@ -16,7 +16,7 @@ append_to_path() {
     fi
 }
 
-# Usage examples
+# Add paths
 append_to_path "$HOME/.cargo/bin"
 append_to_path "$HOME/.deno/bin"
 
