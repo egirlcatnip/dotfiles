@@ -13,7 +13,7 @@
 		{
 			"type": "host",
 			"key": " ",
-			"format": "{1}"
+			"format": "{2}"
 		},
 		{
 			"type": "os",
