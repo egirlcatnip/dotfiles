@@ -8,6 +8,7 @@ ${custom.shell_prefix}\
 $shell\
 $os\
 $username\
+$hostname\
 $directory\
 $cmd_duration\
 $line_break\
@@ -52,6 +53,10 @@ format = "on [$symbol](none) | "
 disabled = false
 format = "[$user](none) | "
 show_always = false
+
+[hostname]
+disabled = false
+format = "[$hostname](none) | "
 
 [directory]
 disabled = false
