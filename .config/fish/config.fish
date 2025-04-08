@@ -1,5 +1,5 @@
 # Initialize Starship prompt
-starship init fish > $HOME/.cache/starship/starship.fish
+starship init fish >$HOME/.cache/starship/starship.fish
 source $HOME/.cache/starship/starship.fish
 
 # Environment variables
@@ -28,11 +28,10 @@ alias gnome-terminal='ptyxis'
 alias prolog='scryer-prolog'
 
 # Terminal specific configuration
-if test "$TERM" = "linux"
+if test "$TERM" = linux
     # In TTY
-    ;
 else
     # In graphical terminal
     set -x STARSHIP_CONFIG "$HOME/.config/starship.toml"
-    set -x EDITOR codium
+    set -x EDITOR code
 end
