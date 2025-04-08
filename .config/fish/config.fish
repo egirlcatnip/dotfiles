@@ -1,5 +1,5 @@
 # Initialize Starship prompt
-starship init fish > $HOME/.cache/starship/starship.fish
+starship init fish >$HOME/.cache/starship/starship.fish
 source $HOME/.cache/starship/starship.fish
 
 # Environment variables
@@ -10,11 +10,9 @@ set -x STARSHIP_CONFIG "$HOME/.config/starship_tty.toml"
 
 # Path management
 # Function to append to PATH if not already present
-function append_to_path
-    if not contains -- $argv $PATH
-        set -x PATH $PATH $argv
-    end
-end
+function append_to_path if (not contains -- $argv $PATH); then
+    set -x PATH $PATH $argv
+fi
 
 # Add paths
 append_to_path "$HOME/.cargo/bin"
@@ -28,11 +26,11 @@ alias gnome-terminal='ptyxis'
 alias prolog='scryer-prolog'
 
 # Terminal specific configuration
-if test "$TERM" = "linux"
+if (test "$TERM" = "linux"); then
     # In TTY
-    ;
+    # No specific configuration for TTY
 else
     # In graphical terminal
     set -x STARSHIP_CONFIG "$HOME/.config/starship.toml"
-    set -x EDITOR codium
-end
+    set -x EDITOR code
+fi
