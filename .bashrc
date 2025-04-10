@@ -1,4 +1,5 @@
 # Initialize Starship prompt
+mkdir -p $HOME/.cache/starship
 starship init bash > $HOME/.cache/starship/starship.sh
 
 source $HOME/.cache/starship/starship.sh
