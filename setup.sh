@@ -32,7 +32,10 @@ prompt_user() {
   log "5. Run system updates and additional setup tasks."
 
   while true; do
-    read -r -p "Do you want to proceed? (y/n): " yn
+    if ! read -r -p "Do you want to proceed? (y/n): " yn < /dev/tty; then
+      echo "Failed to read input. Exiting."
+      exit 1
+    fi
     case $yn in
       [Yy]* ) break;;
       [Nn]* ) echo "Exiting script."; exit;;
