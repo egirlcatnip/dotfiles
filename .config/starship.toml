@@ -78,4 +78,4 @@ only_nonzero_diffs = true
 [character]
 disabled = false
 success_symbol = '''[\$](bold green)'''
-error_symbol = '''[$](bold red)'''
+error_symbol = '''[\$](bold red)'''
