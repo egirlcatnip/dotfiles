@@ -31,18 +31,25 @@ prompt_user() {
   log "4. Set fish shell as the default shell."
   log "5. Run system updates and additional setup tasks."
 
-  while true; do
-    if ! read -r -p "Do you want to proceed? (y/n): " yn < /dev/tty; then
-      echo "Failed to read input. Exiting."
-      exit 1
-    fi
-    case $yn in
-      [Yy]* ) break;;
-      [Nn]* ) echo "Exiting script."; exit;;
-      * ) echo "Please answer y or n.";;
-    esac
-  done
+  if [ -t 0 ]; then
+    while true; do
+      read -r -p "Do you want to proceed? (y/n): " yn
+      case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) echo "Exiting script."; exit;;
+        * ) echo "Please answer y or n.";;
+      esac
+    done
+  else
+    warn "Running in non-interactive mode (e.g., piped). Starting in 10 seconds..."
+    for i in {10..1}; do
+      printf "\rStarting in %2d seconds..." "$i"
+      sleep 1
+    done
+    echo
+  fi
 }
+
 
 add_repositories() {
   log "Adding repositories..."
