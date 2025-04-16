@@ -70,7 +70,7 @@ install_dotfiles() {
 install_core_packages() {
   log "Installing core packages..."
 
-  sudo dnf install -y fish starship fastfetch micro btop topgrade tailscale ripgrep fd-find
+  sudo dnf install -y fish starship fastfetch micro btop topgrade tailscale ripgrep fd-find gh tealdeer
   success "Core packages installed"
 }
 
