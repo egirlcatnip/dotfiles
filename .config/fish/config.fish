@@ -1,13 +1,11 @@
 # Initialize Starship prompt
-mkdir -p $HOME/.cache/starship
-starship init fish >$HOME/.cache/starship/starship.fish
-source $HOME/.cache/starship/starship.fish
+mkdir -p /tmp/starship
+starship init fish >"/tmp/starship/starship.fish"
+source "/tmp/starship/starship.fish"
 
 # Environment variables
 set fish_greeting
-set -x EDITOR micro
 set -x BINSTALL_NO_CONFIRM true
-# set -x STARSHIP_CONFIG "$HOME/.config/starship_tty.toml"
 
 # Path management
 # Function to append to PATH if not already present
@@ -22,16 +20,27 @@ append_to_path "$HOME/.cargo/bin"
 append_to_path "$HOME/.deno/bin"
 
 # Aliases
-alias cc='clang -Wall -Wpedantic -Wextra -Wno-format -Wno-format-pedantic -Wno-unused-parameter -Wno-newline-eof -Wno-deprecated-declarations --std=c23 -x c'
-alias c++c='clang -Wall -Wpedantic -Wextra -Wno-format -Wno-format-pedantic -Wno-unused-parameter -Wno-newline-eof -Wno-deprecated-declarations --std=c++23 -x c++'
-
-alias gnome-terminal='ptyxis'
-alias prolog='scryer-prolog'
+alias gcc='gcc -Wall -Wpedantic -Wextra -Wno-deprecated-declarations -x c'
+alias g++='g++ -Wall -Wpedantic -Wextra -Wno-deprecated-declarations -x c++'
 
 # Terminal specific configuration
 if test "$TERM" = linux
     # In TTY
+    export EDITOR='micro'
+
+    :
 else
     # In graphical terminal
-    set -x EDITOR code
+    export EDITOR='code'
+
+    :
+end
+
+if test "$SSH_CONNECTION"
+    # In SSH
+    export EDITOR='micro'
+    :
+else
+    # Not in SSH
+    :
 end

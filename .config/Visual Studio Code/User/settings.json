@@ -1,19 +1,8 @@
 {
-  "breadcrumbs.enabled": false,
-  "code-runner.fileDirectoryAsCwd": true,
-  "code-runner.executorMap": {
-    "cpp": "ccp $fileName -o $fileNameWithoutExt.exe; ./$fileNameWithoutExt.exe",
-    "ccc": "ccc $fileName -o $fileNameWithoutExt.exe; ./$fileNameWithoutExt.exe",
-    "rust": "cargo run -q",
-  },
-  "code-runner.ignoreSelection": true,
-  "code-runner.preserveFocus": false,
-  "code-runner.saveFileBeforeRun": true,
-  "code-runner.showExecutionMessage": false,
+  // ─── Editor Settings ──────────────────────────────────────────────────────────────
   "editor.accessibilitySupport": "off",
   "editor.codeLens": false,
   "editor.cursorBlinking": "phase",
-  // Editor Settings
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 10,
   "editor.cursorWidth": 2,
@@ -25,7 +14,6 @@
   "editor.formatOnType": true,
   "editor.inlayHints.enabled": "off",
   "editor.inlineSuggest.syntaxHighlightingEnabled": true,
-  "editor.minimap.autohide": true,
   "editor.minimap.renderCharacters": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": "off",
@@ -37,19 +25,24 @@
   "editor.scrollbar.horizontalScrollbarSize": 0,
   "editor.scrollbar.vertical": "hidden",
   "editor.scrollbar.verticalScrollbarSize": 0,
-  "editor.smoothScrolling": true,
   "editor.suggest.matchOnWordStartOnly": false,
   "editor.suggest.preview": true,
   "editor.suggestSelection": "recentlyUsedByPrefix",
+  "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.wrappingStrategy": "advanced",
-  "errorLens.messageBackgroundMode": "message",
-  "explorer.compactFolders": false,
+  "editor.mouseWheelZoom": true,
+  "editor.semanticTokenColorCustomizations": {
+    "enabled": true
+  },
+  // ─── Explorer Settings ─────────────────────────────────────────────────────────────
   "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
   "explorer.confirmPasteNative": false,
   "explorer.sortOrder": "type",
-  "file-browser.hideIgnoredFiles": true,
-  "file-browser.labelIgnoredFiles": true,
+  "explorer.copyRelativePathSeparator": "/",
+  "explorer.fileNesting.enabled": true,
+  // ─── Files Settings ────────────────────────────────────────────────────────────────
   "files.associations": {
     "CompilerExplorer": "asm-intel-x86-generic",
     ".clang-format": "json",
@@ -57,10 +50,11 @@
   },
   "files.readonlyFromPermissions": true,
   "files.trimTrailingWhitespace": true,
-  // Git Settings
+  // ─── Git & GitHub Settings ─────────────────────────────────────────────────────────
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "git.openRepositoryInParentFolders": "always",
+  "git.autofetch": true,
   "github.copilot.advanced": {
     "authProvider": "github"
   },
@@ -70,42 +64,46 @@
     "markdown": true,
     "scminput": false
   },
-  // Security Settings
+  // ─── Security & Privacy Settings ───────────────────────────────────────────────────
   "security.workspace.trust.enabled": false,
-  // Telemetry Settings
   "telemetry.telemetryLevel": "off",
-  // Terminal Settings
-  "terminal.external.linuxExec": "ptyxis",
+  // ─── Terminal Settings ────────────────────────────────────────────────────────────
   "terminal.integrated.commandsToSkipShell": [
     "code-runner.run",
-    "workbench.view.explorer",
-    "workbench.action.toggleSidebarVisibility"
+    "workbench.action.decreaseViewSize",
+    "workbench.action.increaseViewSize",
+    "workbench.action.terminal.resizePaneUp",
+    "workbench.action.terminal.resizePaneDown"
   ],
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorStyleInactive": "none",
   "terminal.integrated.cursorWidth": 2,
-  "terminal.integrated.defaultProfile.linux": "nu",
-  "terminal.integrated.enableImages": true,
-  "terminal.integrated.persistentSessionReviveProcess": "never",
-  "terminal.integrated.scrollback": 10000,
-  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
-  "terminal.integrated.shellIntegration.history": 1000,
-  "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.wordSeparators": " ()[]{}',`─‘’“”|_",
-  // Update Settings
+  "terminal.integrated.scrollback": 2000,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.initialHint": false,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.profiles.linux": {
+    "nu": {
+      "path": "nu",
+      "icon": "terminal-bash"
+    }
+  },
+  // ─── Update & Extension Settings ───────────────────────────────────────────────────
   "update.mode": "none",
   "update.showReleaseNotes": false,
-  // Window Settings
+  "lldb.showDisassembly": "never",
+  // ─── Window Settings ──────────────────────────────────────────────────────────────
   "window.autoDetectColorScheme": true,
+  "window.customTitleBarVisibility": "auto",
   "window.dialogStyle": "custom",
   "window.menuBarVisibility": "toggle",
   "window.newWindowDimensions": "maximized",
-  "window.restoreFullscreen": true,
-  "window.title": "${rootName}",
-  "window.titleBarStyle": "custom",
-  "window.zoomLevel": 1,
-  // Workbench Settings
+  "window.zoomPerWindow": false,
+  "window.commandCenter": false,
+  // ─── Workbench Settings ───────────────────────────────────────────────────────────
   "workbench.editor.empty.hint": "hidden",
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "chalice-icon-theme",
@@ -115,49 +113,77 @@
   "workbench.preferredDarkColorTheme": "Adwaita Dark & Github syntax highlighting",
   "workbench.startupEditor": "none",
   "workbench.tips.enabled": false,
-  // Zen Mode Settings
-  "zenMode.centerLayout": false,
-  "zenMode.fullScreen": false,
-  "zenMode.showTabs": "none",
   "workbench.commandPalette.experimental.askChatLocation": "quickChat",
   "workbench.commandPalette.experimental.suggestCommands": true,
-  "debug.toolBarLocation": "hidden",
-  "debug.console.acceptSuggestionOnEnter": "on",
-  "accessibility.verbosity.debug": false,
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.highlightModifiedTabs": true,
+  // ─── Debugging Settings ───────────────────────────────────────────────────────────
   "debug.internalConsoleOptions": "neverOpen",
-  "debug.terminal.clearBeforeReusing": true,
+  "debug.onTaskErrors": "abort",
+  "debug.toolBarLocation": "hidden",
   "debug.showVariableTypes": true,
-  "lldb.showDisassembly": "never",
-  "code-runner.showRunCommandInEditorContextMenu": false,
-  "code-runner.runInTerminal": true,
-  "code-runner.clearPreviousOutput": false,
+  "debug.focusWindowOnBreak": false,
+  "debug.focusEditorOnBreak": false,
+  // ─── Error Lens Settings ──────────────────────────────────────────────────────────
+  "errorLens.messageBackgroundMode": "message",
+  "errorLens.messageEnabled": true,
+  "errorLens.statusBarIconsEnabled": true,
+  // ─── Hex Editor Settings ──────────────────────────────────────────────────────────
   "hexeditor.columnWidth": 16,
   "hexeditor.showDecodedText": true,
   "hexeditor.defaultEndianness": "little",
   "hexeditor.inspectorType": "aside",
+  // ─── Task Settings ────────────────────────────────────────────────────────────────
   "task.autoDetect": "off",
-  "workbench.editor.editorActionsLocation": "titleBar",
-  "window.commandCenter": false,
-  "debugControlsInTitlebar.hideDebugStart": true,
-  "workbench.layoutControl.enabled": false,
-  "code-runner.showStopIconInEditorTitleMenu": false,
-  "workbench.panel.showLabels": false,
+  // ─── File-Specific ────────────────────────────────────────────────────────────────
+  // ─── Zen mode ─────────────────────────────────────────────────────────────────────
+  "zenMode.centerLayout": false,
+  "zenMode.showTabs": "none",
+  // ─── Miscellaneous Settings ───────────────────────────────────────────────────────
+  "breadcrumbs.enabled": false,
   "breadcrumbs.icons": false,
-  "errorLens.statusBarIconsEnabled": true,
-  "workbench.editor.highlightModifiedTabs": true,
-  "editor.semanticTokenColorCustomizations": {
-    "enabled": true,
+  "editor.bracketPairColorization.enabled": false,
+  "terminal.integrated.shellIntegration.enabled": false,
+  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
+  "[html]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "window.customTitleBarVisibility": "auto",
-  "git.autofetch": true,
-  "explorer.confirmDragAndDrop": false,
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "errorLens.messageEnabled": true,
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
-  "terminal.integrated.enablePersistentSessions": false,
-  "editor.stickyScroll.enabled": false,
-  "explorer.copyRelativePathSeparator": "/",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.wait": 10,
+  "deno.enable": true,
+  "deno.path": "/home/egirlcatnip/.cargo/bin/deno",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "files.insertFinalNewline": true,
+  "terminal.integrated.fontSize": 16,
+  "workbench.panel.showLabels": false,
+  "editor.minimap.autohide": true,
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "{hexdiff}:/**/*.*": "hexEditor.hexedit",
+    "{git,gitlens,git-graph}:/**/*.{md,csv,svg}": "default"
+  },
+  "zenMode.fullScreen": false,
+  "window.restoreFullscreen": true,
+  "workbench.secondarySideBar.showLabels": false,
+  "window.titleBarStyle": "native",
+  "remote.SSH.remotePlatform": {
+    "raspberry_pi": "linux",
+    "raspberry_pi2": "linux",
+    "raspberrypi.tail1c7505.ts.net": "linux"
+  },
+  "settingsSync.ignoredSettings": [
+    "deno.path"
+  ],
+  "window.titleSeparator": " | ",
+  "window.title": "${remoteName}${separator}${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}",
+  "asm-code-lens.hexCalculator.showInExplorer": false,
+  "asm-code-lens.hexCalculator.showInDebug": false,
+  "asm-code-lens.donated": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "[css]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
   "lldb.suppressUpdateNotifications": true,
-  "sync.gist": "eb749cd1a54b62f48c6351a2b4410c98",
 }

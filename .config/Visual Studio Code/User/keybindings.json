@@ -18,6 +18,14 @@
         "command": "workbench.action.openSettingsJson"
     },
     {
+        "key": "ctrl+k ctrl+s",
+        "command": "workbench.action.openGlobalSettings"
+    },
+    {
+        "key": "ctrl+k s",
+        "command": "workbench.action.openSettingsJson"
+    },
+    {
         "key": "ctrl+k ctrl+k",
         "command": "workbench.action.openGlobalKeybindings"
     },
@@ -27,23 +35,23 @@
     },
     // Copy up & Copy down
     {
-        "key": "ctrl+shift+[ArrowUp]",
+        "key": "ctrl+shift+Up",
         "command": "editor.action.copyLinesUpAction",
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+shift+[ArrowDown]",
+        "key": "ctrl+shift+Down",
         "command": "editor.action.copyLinesDownAction",
         "when": "editorTextFocus && !editorReadonly"
     },
     // Font size
     {
-        "key": "ctrl+[Digit1]",
+        "key": "ctrl+1",
         "command": "editor.action.fontZoomIn",
         "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+[Digit1]",
+        "key": "ctrl+1",
         "command": "workbench.action.terminal.fontZoomIn",
         "when": "terminalFocus"
     },
@@ -59,7 +67,7 @@
     },
     // Rebind zoom in/out
     {
-        "key": "ctrl+shift+[Digit1]",
+        "key": "ctrl+shift+1",
         "command": "workbench.action.zoomIn"
     },
     {
@@ -77,7 +85,7 @@
     },
     // Rebind zoom in/out in terminal
     {
-        "key": "ctrl+shift+[Digit1]",
+        "key": "ctrl+shift+1",
         "command": "workbench.action.zoomIn",
         "when": "terminalFocus"
     },
@@ -109,22 +117,12 @@
     },
     // SideBar
     {
-        "key": "ctrl+[Backslash]",
+        "key": "ctrl+/",
         "command": "workbench.action.focusSideBar",
         "when": "!SideBarFocus"
     },
     {
-        "key": "ctrl+[Backslash]",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "sideBarFocus",
-    },
-    {
-        "key": "ctrl+[IntlBackslash]",
-        "command": "workbench.action.focusSideBar",
-        "when": "!SideBarFocus"
-    },
-    {
-        "key": "ctrl+[IntlBackslash]",
+        "key": "ctrl+/",
         "command": "workbench.action.toggleSidebarVisibility",
         "when": "sideBarFocus",
     },
@@ -217,10 +215,84 @@
     },
     {
         "key": "ctrl+shift+[Delete]",
-        "command": "deleteeWordRight",
+        "command": "deleteWordRight",
         "when": "textInputFocus"
     },
+    // Sidebar panels
+    // Files view
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.view.explorer",
+        "when": "activeViewlet != 'workbench.view.explorer'"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "activeViewlet == 'workbench.view.explorer'"
+    },
+    // Extensions view
+    {
+        "key": "ctrl+shift+x",
+        "command": "workbench.view.extensions",
+        "when": "activeViewlet != 'workbench.view.extensions'"
+    },
+    {
+        "key": "ctrl+shift+x",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "activeViewlet == 'workbench.view.extensions'"
+    },
+    // Search view
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.view.search",
+        "when": "activeViewlet != 'workbench.view.search'"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "activeViewlet == 'workbench.view.search'"
+    },
+    // Source Control view
+    {
+        "key": "ctrl+shift+g",
+        "command": "workbench.view.scm",
+        "when": "activeViewlet != 'workbench.view.scm'"
+    },
+    {
+        "key": "ctrl+shift+g",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "activeViewlet == 'workbench.view.scm'"
+    },
+    // Run view
+    {
+        "key": "ctrl+shift+d",
+        "command": "workbench.view.debug",
+        "when": "activeViewlet != 'workbench.view.debug'"
+    },
+    {
+        "key": "ctrl+shift+d",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "activeViewlet == 'workbench.view.debug'"
+    },
     /*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -348,7 +420,125 @@
         "command": "-extension.stop"
     },
     {
-        "key": "ctrl+oem_5",
-        "command": "-workbench.action.splitEditor"
+        "key": "ctrl+k m",
+        "command": "-workbench.action.editor.changeLanguageMode",
+        "when": "!notebookEditorFocused"
+    },
+    {
+        "key": "ctrl+alt+k",
+        "command": "-code-runner.runCustomCommand"
+    },
+    {
+        "key": "ctrl+shift+x",
+        "command": "-workbench.view.extensions",
+        "when": "viewContainer.workbench.view.extensions.enabled"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+k ctrl+p",
+        "command": "-workbench.action.showAllEditors"
+    },
+    {
+        "key": "ctrl+k s",
+        "command": "-workbench.action.files.saveWithoutFormatting"
+    },
+    {
+        "key": "ctrl+k ctrl+s",
+        "command": "-workbench.action.openGlobalKeybindings"
+    },
+    {
+        "key": "ctrl+k ctrl+left",
+        "command": "-workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "ctrl+k left",
+        "command": "-workbench.action.moveActiveEditorGroupLeft"
+    },
+    {
+        "key": "ctrl+k left",
+        "command": "-views.moveViewLeft",
+        "when": "focusedView != ''"
+    },
+    {
+        "key": "ctrl+k right",
+        "command": "-workbench.action.moveActiveEditorGroupRight"
+    },
+    {
+        "key": "ctrl+k right",
+        "command": "-views.moveViewRight",
+        "when": "focusedView != ''"
+    },
+    {
+        "key": "ctrl+k ctrl+up",
+        "command": "-workbench.action.focusAboveGroup"
+    },
+    {
+        "key": "ctrl+k up",
+        "command": "-workbench.action.moveActiveEditorGroupUp"
+    },
+    {
+        "key": "ctrl+k down",
+        "command": "-views.moveViewDown",
+        "when": "focusedView != ''"
+    },
+    {
+        "key": "ctrl+k ctrl+down",
+        "command": "-workbench.action.focusBelowGroup"
+    },
+    {
+        "key": "ctrl+k down",
+        "command": "-workbench.action.moveActiveEditorGroupDown"
+    },
+    {
+        "key": "ctrl+k up",
+        "command": "-views.moveViewUp",
+        "when": "focusedView != ''"
+    },
+    {
+        "key": "ctrl+k ctrl+right",
+        "command": "-workbench.action.focusRightGroup"
+    },
+    {
+        "key": "ctrl+-",
+        "command": "-workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "-markdown.extension.editing.toggleBold",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "-markdown.extension.editing.toggleItalic",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "-markdown.extension.editing.toggleMath",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "alt+s",
+        "command": "-markdown.extension.editing.toggleStrikethrough",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "alt+c",
+        "command": "-markdown.extension.checkTaskList",
+        "when": "editorTextFocus && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "-markdown.showPreview",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+    },
+    {
+        "key": "ctrl+k v",
+        "command": "-markdown.showPreviewToSide",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
     },
 ]
