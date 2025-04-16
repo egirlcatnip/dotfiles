@@ -13,15 +13,15 @@ yellow="\033[1;33m"
 reset="\033[0m"
 
 log() {
-  printf "${blue}==>${reset} %s\n" "$1"
+  printf "\n${blue}>>${reset} %s\n" "$1"
 }
 
 success() {
-  printf "${green}✓${reset} %s\n" "$1"
+  printf "\n${green}>>${reset} %s\n" "$1"
 }
 
 warn() {
-  printf "${yellow}!${reset} %s\n" "$1"
+  printf "\n${yellow}>>${reset} %s\n" "$1"
 }
 
 add_repositories() {
@@ -69,7 +69,7 @@ install_dotfiles() {
 
 install_core_packages() {
   log "Installing core packages..."
-  sudo dnf update -y --refresh
+
   sudo dnf install -y fish starship fastfetch micro btop topgrade tailscale ripgrep fd-find
   success "Core packages installed"
 }
@@ -87,9 +87,12 @@ set_fish_shell() {
 }
 
 run_finishers() {
+  log "Updating..."
+  topgrade || warn "Topgrade failed"
+
   success "System setup complete"
 
-  topgrade || warn "Topgrade failed"
+  log "Fastfetch..."
   fastfetch || warn "Fastfetch failed"
 }
 
