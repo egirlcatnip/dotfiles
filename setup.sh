@@ -1,24 +1,24 @@
 #!/bin/bash
-# egirlcatscript v1.0.6
-# Run with: curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/egirlcatscript.sh | bash
+# setup.sh v1.0.8
+# Run with: curl -sL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | bash
 
 set -euo pipefail
 
-VERSION="v1.0.6"
+VERSION="v1.0.8"
 
 log(){
   ts=$(date +"%T")
   msg="$1"
-  width=${COLUMNS:-80}
-  prefix="-- $ts - $msg "
+  cols=$(tput cols 2>/dev/null || echo 80)
+  prefix="$ts - $msg "
   prefix_len=${#prefix}
-  if (( width>prefix_len )); then
-    fill_len=$((width-prefix_len))
-    fill=$(printf '%*s' "$fill_len" '' | tr ' ' '-')
+  if (( cols > prefix_len )); then
+    fill_len=$((cols - prefix_len))
+    fill=$(printf '%*s' "$fill_len" '' | tr ' ' '─')
   else
     fill=""
   fi
-  printf "\n%s%s\n" "$prefix" "$fill"
+  printf "%s%s\n" "$prefix" "$fill"
 }
 
 success(){
@@ -39,7 +39,7 @@ install_gum(){
 }
 
 prompt_user(){
-  log "egirlcatscript ${VERSION}"
+  log "setup.sh ${VERSION}"
   gum format "This installer will:
 1. Register VS Code, RPM Fusion & Terra repositories
 2. Install any missing core packages
@@ -52,6 +52,7 @@ prompt_user(){
 add_repos(){
   arch=$(uname -m)
   fedora=$(rpm -E %fedora)
+
   if [[ ! -f /etc/yum.repos.d/vscode.repo ]]; then
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
     echo -e "[code]
@@ -68,6 +69,7 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
   else
     success "VS Code repo exists"
   fi
+
   for repo in rpmfusion-free-release rpmfusion-nonfree-release; do
     if ! rpm -q "$repo" &> /dev/null; then
       base=${repo%%-release}
@@ -80,6 +82,7 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
       success "$repo exists"
     fi
   done
+
   if [[ ! -f /etc/nobara-release ]] && ! rpm -q terra-release &> /dev/null; then
     sudo dnf install -y \
       --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
@@ -97,6 +100,7 @@ install_packages(){
   for pkg in "${core[@]}"; do
     rpm -q "$pkg" &> /dev/null || missing+=("$pkg")
   done
+
   if (( ${#missing[@]} > 0 )); then
     sudo dnf install -y "${missing[@]}" > /dev/null 2>&1 \
       && success "Installed: ${missing[*]}" \
@@ -111,7 +115,9 @@ install_dotfiles(){
     cd ~/.dotfiles
     git fetch --quiet
     if ! git diff --quiet HEAD origin/main; then
-      git reset --hard origin/main --quiet && success "Dotfiles updated" || warn "Dotfiles update failed"
+      git reset --hard origin/main --quiet \
+        && success "Dotfiles updated" \
+        || warn    "Dotfiles update failed"
     else
       success "Dotfiles up-to-date"
     fi
@@ -120,6 +126,7 @@ install_dotfiles(){
       && success "Dotfiles cloned" \
       || warn    "Dotfiles clone failed"
   fi
+
   cp -rf ~/.dotfiles/.config ~/.config
   cp -rf ~/.dotfiles/.local  ~/.local
   cp -rf ~/.dotfiles/.bashrc ~/.bashrc
