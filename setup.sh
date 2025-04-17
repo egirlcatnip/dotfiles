@@ -117,7 +117,7 @@ set_shell() {
 }
 
 finalize() {
-  topgrade || warn "Topgrade encountered issues"
+  topgrade -y || warn "Topgrade encountered issues"
   fastfetch || warn "Fastfetch encountered issues"
 }
 
