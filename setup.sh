@@ -1,34 +1,21 @@
 #!/bin/bash
-# setup.sh v1.0.9
+# setup.sh v1.0.10
 # Run with: curl -sL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | bash
 
 set -euo pipefail
 
-VERSION="v1.0.9"
+VERSION="v1.0.10"
 
 log() {
-  ts=$(date +"%T")
-  cols=$(tput cols 2>/dev/null || echo 80)
-  msg="$1"
-  prefix="── $ts - $msg "
-  prefix_len=${#prefix}
-  if (( cols > prefix_len )); then
-    fill_len=$((cols - prefix_len))
-    fill=$(printf '%*s' "$fill_len" '' | tr ' ' '─')
-  else
-    fill=""
-  fi
-  printf "%s%s\n" "$prefix" "$fill"
+  gum style --foreground=blue --bold "$1"
 }
 
 success() {
-  ts=$(date +"%T")
-  printf "[%s] OK: %s\n" "$ts" "$1"
+  gum style --foreground=green --bold "$1"
 }
 
 warn() {
-  ts=$(date +"%T")
-  printf "[%s] WARNING: %s\n" "$ts" "$1"
+  gum style --foreground=yellow --bold "$1"
 }
 
 install_gum() {
@@ -45,7 +32,8 @@ prompt_user() {
 2. Install any missing core packages
 3. Clone or update your dotfiles
 4. Switch your default shell to Fish
-5. Run final update and cleanup steps"
+5. Run final update and cleanup steps
+"
   gum confirm "Continue?" || { warn "Aborted."; exit 1; }
 }
 
