@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-VERSION="v1.0.4"
+VERSION="v1.0.5"
 
 log()        { gum format "## $1"; }
 success()    { gum format "OK: $1"; }
@@ -18,7 +18,7 @@ install_gum() {
 }
 
 prompt_user() {
-  gum format "### Egirlcatnip Fedora Setup ${VERSION}
+  gum format "### egirlcatscript fedora setup.sh ${VERSION}
 
 This installer will:
 1. Register VS Code, RPM Fusion & Terra repositories
@@ -28,6 +28,13 @@ This installer will:
 5. Run final update and cleanup steps
 "
   gum confirm "Continue?" || { gum format "Aborted."; exit 1; }
+}
+
+initial_update() {
+  gum confirm "Run 'dnf update -y --refresh' before setup?" && {
+    sudo dnf update -y --refresh
+    success "System updated"
+  }
 }
 
 add_repos() {
@@ -117,9 +124,11 @@ set_shell() {
 }
 
 finalize() {
-  topgrade -y
-  echo
-  echo
+  if gum confirm "Run 'topgrade -y' to finalize and clean up?"; then
+    topgrade -y
+    echo
+    echo
+  fi
   fastfetch
 }
 
@@ -127,6 +136,7 @@ main() {
   install_gum
   prompt_user
   sudo -v
+  initial_update
   log "Starting setup"
   add_repos
   install_packages
