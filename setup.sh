@@ -1,6 +1,6 @@
 #!/bin/bash
 # egirlcatscript v1.0.3
-# Run with: curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | sh
+# curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/refs/heads/main/setup.sh | sh
 
 set -euo pipefail
 
