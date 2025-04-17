@@ -1,18 +1,18 @@
 #!/bin/bash
-# egirlcatscript
-# curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/egirlcatscript.sh | bash
+# egirlcatscript v1.0.4
+# Run with: curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/egirlcatscript.sh | bash
 
 set -euo pipefail
 
-VERSION="v1.0.3"
+VERSION="v1.0.4"
 
-log()   { gum format "## $1"; }
+log()    { gum format "## $1"; }
 success(){ gum format "OK: $1"; }
 warn()   { gum format "WARNING: $1"; }
 
 install_gum(){
   command -v gum &> /dev/null || {
-    echo "Installing gum…"
+    echo "Installing gum..."
     sudo dnf install -y gum > /dev/null 2>&1
   }
 }
@@ -27,7 +27,8 @@ This installer will:
 4. Switch your default shell to Fish
 5. Run final update and cleanup steps
 "
-  gum confirm "Continue?" || { gum format "Aborted."; exit; }
+  gum confirm "Continue?" \
+    || { gum format "Aborted."; exit 1; }
 }
 
 add_repos(){
@@ -52,10 +53,11 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
   fi
 
   for repo in rpmfusion-free-release rpmfusion-nonfree-release; do
-    if ! rpm -q $repo &> /dev/null; then
+    if ! rpm -q "$repo" &> /dev/null; then
       base=${repo%%-release}
-      sudo dnf install -y --repofrompath="${base},https://download1.rpmfusion.org/${base}/fedora/releases/${fedora}/Everything/${arch}/os/" \
-        --nogpgcheck $repo > /dev/null 2>&1 \
+      sudo dnf install -y \
+        --repofrompath="${base},https://download1.rpmfusion.org/${base}/fedora/releases/${fedora}/Everything/${arch}/os/" \
+        --nogpgcheck "$repo" > /dev/null 2>&1 \
         && success "$repo added" \
         || warn    "$repo failed"
     else
@@ -63,8 +65,10 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
     fi
   done
 
-  if [[ ! -f /etc/nobara-release && ! rpm -q terra-release &> /dev/null ]]; then
-    sudo dnf install -y --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
+  # Terra repo: only add if not Nobara and not already installed
+  if [[ ! -f /etc/nobara-release ]] && ! rpm -q terra-release &> /dev/null; then
+    sudo dnf install -y \
+      --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
       --nogpgcheck terra-release > /dev/null 2>&1 \
       && success "Terra repo added" \
       || warn    "Terra repo failed"
@@ -77,9 +81,10 @@ install_packages(){
   core=(fish starship fastfetch micro btop topgrade tailscale ripgrep fd-find gh tealdeer rustup gdb)
   missing=()
   for pkg in "${core[@]}"; do
-    rpm -q $pkg &> /dev/null || missing+=($pkg)
+    rpm -q "$pkg" &> /dev/null || missing+=("$pkg")
   done
-  if (( ${#missing[@]} )); then
+
+  if (( ${#missing[@]} > 0 )); then
     sudo dnf install -y "${missing[@]}" > /dev/null 2>&1 \
       && success "Installed: ${missing[*]}" \
       || warn    "Some packages failed"
@@ -93,15 +98,18 @@ install_dotfiles(){
     cd ~/.dotfiles
     git fetch --quiet
     if ! git diff --quiet HEAD origin/main; then
-      git reset --hard origin/main --quiet && success "Dotfiles updated" || warn "Update failed"
+      git reset --hard origin/main --quiet \
+        && success "Dotfiles updated" \
+        || warn    "Dotfiles update failed"
     else
       success "Dotfiles up-to-date"
     fi
   else
     git clone --quiet https://github.com/egirlcatnip/dotfiles ~/.dotfiles \
       && success "Dotfiles cloned" \
-      || warn    "Clone failed"
+      || warn    "Dotfiles clone failed"
   fi
+
   cp -rf ~/.dotfiles/.config ~/.config
   cp -rf ~/.dotfiles/.local  ~/.local
   cp -rf ~/.dotfiles/.bashrc ~/.bashrc
@@ -109,7 +117,10 @@ install_dotfiles(){
 
 set_shell(){
   if [[ "$SHELL" != "/bin/fish" ]]; then
-    sudo chsh -s /bin/fish "$USER" && sudo chsh -s /bin/fish root && success "Fish shell set"
+    sudo chsh -s /bin/fish "$USER" \
+      && sudo chsh -s /bin/fish root \
+      && success "Fish shell set" \
+      || warn    "Failed to set Fish shell"
   else
     success "Fish is default shell"
   fi
