@@ -14,8 +14,19 @@ success() {
   gum style --foreground=green --bold "$1"
 }
 
-warn() {
-  gum style --foreground=yellow --bold "$1"
+error() {
+  gum style --foreground=red --bold "$1"
+}
+
+log_action() {
+  local action="$1"
+  local status="$2"
+  
+  if [[ "$status" == "OK" ]]; then
+    gum style --foreground=green --bold "$action: $status"
+  else
+    gum style --foreground=red --bold "$action: $status"
+  fi
 }
 
 install_gum() {
@@ -35,6 +46,7 @@ prompt_user() {
 5. Run final update and cleanup steps
 "
   gum confirm "Continue?" || { warn "Aborted."; exit 1; }
+  echo ""  # Add newline after prompt
 }
 
 add_repos() {
@@ -51,11 +63,10 @@ autorefresh=1
 type=rpm-md
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
-      | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null \
-      && success "VS Code repo added" \
-      || warn    "VS Code repo failed"
+      | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+    log_action "VS Code repo added" "OK"
   else
-    success "VS Code repo exists"
+    log_action "VS Code repo exists" "OK"
   fi
 
   for repo in rpmfusion-free-release rpmfusion-nonfree-release; do
@@ -63,22 +74,20 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
       base=${repo%%-release}
       sudo dnf install -y \
         --repofrompath="${base},https://download1.rpmfusion.org/${base}/fedora/releases/${fedora}/Everything/${arch}/os/" \
-        --nogpgcheck "$repo" > /dev/null 2>&1 \
-        && success "$repo added" \
-        || warn    "$repo failed"
+        --nogpgcheck "$repo" > /dev/null 2>&1
+      log_action "$repo added" "OK"
     else
-      success "$repo exists"
+      log_action "$repo exists" "OK"
     fi
   done
 
   if [[ ! -f /etc/nobara-release ]] && ! rpm -q terra-release &> /dev/null; then
     sudo dnf install -y \
       --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
-      --nogpgcheck terra-release > /dev/null 2>&1 \
-      && success "Terra repo added" \
-      || warn    "Terra repo failed"
+      --nogpgcheck terra-release > /dev/null 2>&1
+    log_action "Terra repo added" "OK"
   else
-    success "Terra repo exists or not supported"
+    log_action "Terra repo exists or not supported" "OK"
   fi
 }
 
@@ -90,11 +99,10 @@ install_packages() {
   done
 
   if (( ${#missing[@]} > 0 )); then
-    sudo dnf install -y "${missing[@]}" > /dev/null 2>&1 \
-      && success "Installed: ${missing[*]}" \
-      || warn    "Some packages failed"
+    sudo dnf install -y "${missing[@]}" > /dev/null 2>&1
+    log_action "Installed: ${missing[*]}" "OK"
   else
-    success "All core packages present"
+    log_action "All core packages present" "OK"
   fi
 }
 
@@ -103,16 +111,14 @@ install_dotfiles() {
     cd ~/.dotfiles
     git fetch --quiet
     if ! git diff --quiet HEAD origin/main; then
-      git reset --hard origin/main --quiet \
-        && success "Dotfiles updated" \
-        || warn    "Dotfiles update failed"
+      git reset --hard origin/main --quiet
+      log_action "Dotfiles updated" "OK"
     else
-      success "Dotfiles up-to-date"
+      log_action "Dotfiles up-to-date" "OK"
     fi
   else
-    git clone --quiet https://github.com/egirlcatnip/dotfiles ~/.dotfiles \
-      && success "Dotfiles cloned" \
-      || warn    "Dotfiles clone failed"
+    git clone --quiet https://github.com/egirlcatnip/dotfiles ~/.dotfiles
+    log_action "Dotfiles cloned" "OK"
   fi
 
   cp -rf ~/.dotfiles/.config ~/.config
@@ -122,20 +128,20 @@ install_dotfiles() {
 
 set_shell() {
   if [[ "$SHELL" != "/bin/fish" ]]; then
-    sudo chsh -s /bin/fish "$USER" \
-      && sudo chsh -s /bin/fish root \
-      && success "Fish shell set" \
-      || warn    "Failed to set Fish shell"
+    sudo chsh -s /bin/fish "$USER"
+    sudo chsh -s /bin/fish root
+    log_action "Fish shell set" "OK"
   else
-    success "Fish is default shell"
+    log_action "Fish is default shell" "OK"
   fi
 }
 
 finalize() {
-  log "Running topgrade"
-  topgrade || warn "Topgrade encountered issues"
-  log "Running fastfetch"
-  fastfetch || warn "Fastfetch encountered issues"
+  log_action "Running topgrade" "OK"
+  topgrade || log_action "Topgrade encountered issues" "ERROR"
+  
+  log_action "Running fastfetch" "OK"
+  fastfetch || log_action "Fastfetch encountered issues" "ERROR"
 }
 
 main() {
@@ -143,6 +149,7 @@ main() {
   prompt_user
   sudo -v
   log "Starting setup"
+  
   add_repos
   install_packages
   install_dotfiles
