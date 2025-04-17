@@ -118,6 +118,8 @@ set_shell() {
 
 finalize() {
   topgrade -y
+  echo
+  echo
   fastfetch
 }
 
