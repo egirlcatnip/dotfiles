@@ -1,5 +1,5 @@
 #!/bin/bash
-# egirlcatscript v1.0.3
+# egirlcatscript
 # curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/egirlcatscript.sh | bash
 
 set -euo pipefail
@@ -23,8 +23,8 @@ prompt_user(){
 This installer will:
 1. Register VS Code, RPM Fusion & Terra repositories
 2. Install any missing core packages
-3. Clone or update dotfiles
-4. Switch default shell to Fish
+3. Clone or update your dotfiles
+4. Switch your default shell to Fish
 5. Run final update and cleanup steps
 "
   gum confirm "Continue?" || { gum format "Aborted."; exit; }
