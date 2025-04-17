@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-VERSION="v1.0.2"
+VERSION="v1.0.3"
 
 log()   { gum format "## $1"; }
 success(){ gum format "OK: $1"; }
@@ -18,13 +18,13 @@ install_gum(){
 }
 
 prompt_user(){
-  gum format "### Egirlcatnip Fedora Setup ${VERSION}
+  gum format "### egirlcatscript ${VERSION}
 
 This installer will:
 1. Register VS Code, RPM Fusion & Terra repositories
 2. Install any missing core packages
-3. Clone or update your dotfiles
-4. Switch your default shell to Fish
+3. Clone or update dotfiles
+4. Switch default shell to Fish
 5. Run final update and cleanup steps
 "
   gum confirm "Continue?" || { gum format "Aborted."; exit; }
