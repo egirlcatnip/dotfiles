@@ -1,10 +1,10 @@
 #!/bin/bash
-# setup.sh v1.0.10
+# egirlcatscript
 # Run with: curl -sL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | bash
 
 set -euo pipefail
 
-VERSION="v1.0.10"
+VERSION="v1.0.11"
 
 log() {
   gum style --foreground=blue --bold "$1"
@@ -22,16 +22,12 @@ log_action() {
   local action="$1"
   local status="$2"
   
-  if [[ "$status" == "OK" ]]; then
-    gum style --foreground=green --bold "$action: $status"
-  else
-    gum style --foreground=red --bold "$action: $status"
-  fi
+  gum style "$action: $status"
 }
 
 install_gum() {
   command -v gum &> /dev/null || {
-    echo "Installing gum..."
+    echo "Installing gum runtime dependency..."
     sudo dnf install -y gum > /dev/null 2>&1
   }
 }
