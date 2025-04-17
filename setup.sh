@@ -1,51 +1,36 @@
 #!/bin/bash
-# egirlcatscript
-# Run with: curl -sL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | bash
+# egirlcatscript v1.0.2
+# Run with: curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | sh
 
 set -euo pipefail
 
-VERSION="v1.0.11"
+VERSION="v1.0.2"
 
-log() {
-  gum style --foreground=blue --bold "$1"
-}
+log()   { gum format "## $1"; }
+success(){ gum format "OK: $1"; }
+warn()   { gum format "WARNING: $1"; }
 
-success() {
-  gum style --foreground=green --bold "$1"
-}
-
-error() {
-  gum style --foreground=red --bold "$1"
-}
-
-log_action() {
-  local action="$1"
-  local status="$2"
-  
-  gum style "$action: $status"
-}
-
-install_gum() {
+install_gum(){
   command -v gum &> /dev/null || {
-    echo "Installing gum runtime dependency..."
+    echo "Installing gum…"
     sudo dnf install -y gum > /dev/null 2>&1
   }
 }
 
-prompt_user() {
-  log "setup.sh ${VERSION}"
-  gum format "This installer will:
+prompt_user(){
+  gum format "### Egirlcatnip Fedora Setup ${VERSION}
+
+This installer will:
 1. Register VS Code, RPM Fusion & Terra repositories
 2. Install any missing core packages
 3. Clone or update your dotfiles
 4. Switch your default shell to Fish
 5. Run final update and cleanup steps
 "
-  gum confirm "Continue?" || { warn "Aborted."; exit 1; }
-  echo ""  # Add newline after prompt
+  gum confirm "Continue?" || { gum format "Aborted."; exit; }
 }
 
-add_repos() {
+add_repos(){
   arch=$(uname -m)
   fedora=$(rpm -E %fedora)
 
@@ -59,93 +44,87 @@ autorefresh=1
 type=rpm-md
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
-      | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-    log_action "VS Code repo added" "OK"
+      | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null \
+      && success "VS Code repo added" \
+      || warn    "VS Code repo failed"
   else
-    log_action "VS Code repo exists" "OK"
+    success "VS Code repo exists"
   fi
 
   for repo in rpmfusion-free-release rpmfusion-nonfree-release; do
-    if ! rpm -q "$repo" &> /dev/null; then
+    if ! rpm -q $repo &> /dev/null; then
       base=${repo%%-release}
-      sudo dnf install -y \
-        --repofrompath="${base},https://download1.rpmfusion.org/${base}/fedora/releases/${fedora}/Everything/${arch}/os/" \
-        --nogpgcheck "$repo" > /dev/null 2>&1
-      log_action "$repo added" "OK"
+      sudo dnf install -y --repofrompath="${base},https://download1.rpmfusion.org/${base}/fedora/releases/${fedora}/Everything/${arch}/os/" \
+        --nogpgcheck $repo > /dev/null 2>&1 \
+        && success "$repo added" \
+        || warn    "$repo failed"
     else
-      log_action "$repo exists" "OK"
+      success "$repo exists"
     fi
   done
 
-  if [[ ! -f /etc/nobara-release ]] && ! rpm -q terra-release &> /dev/null; then
-    sudo dnf install -y \
-      --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
-      --nogpgcheck terra-release > /dev/null 2>&1
-    log_action "Terra repo added" "OK"
+  if [[ ! -f /etc/nobara-release && ! rpm -q terra-release &> /dev/null ]]; then
+    sudo dnf install -y --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
+      --nogpgcheck terra-release > /dev/null 2>&1 \
+      && success "Terra repo added" \
+      || warn    "Terra repo failed"
   else
-    log_action "Terra repo exists or not supported" "OK"
+    success "Terra repo exists or not supported"
   fi
 }
 
-install_packages() {
+install_packages(){
   core=(fish starship fastfetch micro btop topgrade tailscale ripgrep fd-find gh tealdeer rustup gdb)
   missing=()
   for pkg in "${core[@]}"; do
-    rpm -q "$pkg" &> /dev/null || missing+=("$pkg")
+    rpm -q $pkg &> /dev/null || missing+=($pkg)
   done
-
-  if (( ${#missing[@]} > 0 )); then
-    sudo dnf install -y "${missing[@]}" > /dev/null 2>&1
-    log_action "Installed: ${missing[*]}" "OK"
+  if (( ${#missing[@]} )); then
+    sudo dnf install -y "${missing[@]}" > /dev/null 2>&1 \
+      && success "Installed: ${missing[*]}" \
+      || warn    "Some packages failed"
   else
-    log_action "All core packages present" "OK"
+    success "All core packages present"
   fi
 }
 
-install_dotfiles() {
+install_dotfiles(){
   if [[ -d ~/.dotfiles ]]; then
     cd ~/.dotfiles
     git fetch --quiet
     if ! git diff --quiet HEAD origin/main; then
-      git reset --hard origin/main --quiet
-      log_action "Dotfiles updated" "OK"
+      git reset --hard origin/main --quiet && success "Dotfiles updated" || warn "Update failed"
     else
-      log_action "Dotfiles up-to-date" "OK"
+      success "Dotfiles up-to-date"
     fi
   else
-    git clone --quiet https://github.com/egirlcatnip/dotfiles ~/.dotfiles
-    log_action "Dotfiles cloned" "OK"
+    git clone --quiet https://github.com/egirlcatnip/dotfiles ~/.dotfiles \
+      && success "Dotfiles cloned" \
+      || warn    "Clone failed"
   fi
-
   cp -rf ~/.dotfiles/.config ~/.config
   cp -rf ~/.dotfiles/.local  ~/.local
   cp -rf ~/.dotfiles/.bashrc ~/.bashrc
 }
 
-set_shell() {
+set_shell(){
   if [[ "$SHELL" != "/bin/fish" ]]; then
-    sudo chsh -s /bin/fish "$USER"
-    sudo chsh -s /bin/fish root
-    log_action "Fish shell set" "OK"
+    sudo chsh -s /bin/fish "$USER" && sudo chsh -s /bin/fish root && success "Fish shell set"
   else
-    log_action "Fish is default shell" "OK"
+    success "Fish is default shell"
   fi
 }
 
-finalize() {
-  log_action "Running topgrade" "OK"
-  topgrade || log_action "Topgrade encountered issues" "ERROR"
-  
-  log_action "Running fastfetch" "OK"
-  fastfetch || log_action "Fastfetch encountered issues" "ERROR"
+finalize(){
+  topgrade || warn "Topgrade encountered issues"
+  fastfetch || warn "Fastfetch encountered issues"
 }
 
-main() {
+main(){
   install_gum
   prompt_user
   sudo -v
   log "Starting setup"
-  
   add_repos
   install_packages
   install_dotfiles
