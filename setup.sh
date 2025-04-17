@@ -1,16 +1,16 @@
 #!/bin/bash
-# setup.sh v1.0.8
+# setup.sh v1.0.9
 # Run with: curl -sL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | bash
 
 set -euo pipefail
 
-VERSION="v1.0.8"
+VERSION="v1.0.9"
 
-log(){
+log() {
   ts=$(date +"%T")
-  msg="$1"
   cols=$(tput cols 2>/dev/null || echo 80)
-  prefix="$ts - $msg "
+  msg="$1"
+  prefix="── $ts - $msg "
   prefix_len=${#prefix}
   if (( cols > prefix_len )); then
     fill_len=$((cols - prefix_len))
@@ -21,24 +21,24 @@ log(){
   printf "%s%s\n" "$prefix" "$fill"
 }
 
-success(){
+success() {
   ts=$(date +"%T")
   printf "[%s] OK: %s\n" "$ts" "$1"
 }
 
-warn(){
+warn() {
   ts=$(date +"%T")
   printf "[%s] WARNING: %s\n" "$ts" "$1"
 }
 
-install_gum(){
+install_gum() {
   command -v gum &> /dev/null || {
     echo "Installing gum..."
     sudo dnf install -y gum > /dev/null 2>&1
   }
 }
 
-prompt_user(){
+prompt_user() {
   log "setup.sh ${VERSION}"
   gum format "This installer will:
 1. Register VS Code, RPM Fusion & Terra repositories
@@ -49,7 +49,7 @@ prompt_user(){
   gum confirm "Continue?" || { warn "Aborted."; exit 1; }
 }
 
-add_repos(){
+add_repos() {
   arch=$(uname -m)
   fedora=$(rpm -E %fedora)
 
@@ -94,7 +94,7 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
   fi
 }
 
-install_packages(){
+install_packages() {
   core=(fish starship fastfetch micro btop topgrade tailscale ripgrep fd-find gh tealdeer rustup gdb)
   missing=()
   for pkg in "${core[@]}"; do
@@ -110,7 +110,7 @@ install_packages(){
   fi
 }
 
-install_dotfiles(){
+install_dotfiles() {
   if [[ -d ~/.dotfiles ]]; then
     cd ~/.dotfiles
     git fetch --quiet
@@ -132,7 +132,7 @@ install_dotfiles(){
   cp -rf ~/.dotfiles/.bashrc ~/.bashrc
 }
 
-set_shell(){
+set_shell() {
   if [[ "$SHELL" != "/bin/fish" ]]; then
     sudo chsh -s /bin/fish "$USER" \
       && sudo chsh -s /bin/fish root \
@@ -143,14 +143,14 @@ set_shell(){
   fi
 }
 
-finalize(){
+finalize() {
   log "Running topgrade"
   topgrade || warn "Topgrade encountered issues"
   log "Running fastfetch"
   fastfetch || warn "Fastfetch encountered issues"
 }
 
-main(){
+main() {
   install_gum
   prompt_user
   sudo -v
