@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-VERSION="v1.0.5"
+VERSION="v1.0.6"
 
 log()        { gum format "## $1"; }
 success()    { gum format "OK: $1"; }
@@ -31,10 +31,11 @@ This installer will:
 }
 
 initial_update() {
-  gum confirm "Run 'dnf update -y --refresh' before setup?" && {
-    sudo dnf update -y --refresh
-    success "System updated"
-  }
+  if gum confirm "Run 'dnf update -y --refresh' before setup?"; then
+    sudo dnf update -y --refresh && success "System updated" || warn "Update failed"
+  else
+    warn "Skipped system update"
+  fi
 }
 
 add_repos() {
@@ -125,10 +126,12 @@ set_shell() {
 
 finalize() {
   if gum confirm "Run 'topgrade -y' to finalize and clean up?"; then
-    topgrade -y
-    echo
-    echo
+    topgrade -y && success "System upgraded" || warn "Topgrade failed"
+  else
+    warn "Skipped topgrade"
   fi
+  echo
+  echo
   fastfetch
 }
 
