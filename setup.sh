@@ -1,15 +1,14 @@
 #!/bin/bash
-# @egirlcatnip
-# Setup Script v1.0.1
-# Run with: curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/setup.sh | bash
+# egirlcatscript v1.0.2
+# Run with: curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/egirlcatscript.sh | bash
 
 set -euo pipefail
 
-VERSION="v1.0.1"
+VERSION="v1.0.2"
 
 log()   { gum format "## $1"; }
-success(){ gum format "**✔️ $1**"; }
-warn()   { gum format "**⚠️ $1**"; }
+success(){ gum format "OK: $1"; }
+warn()   { gum format "WARNING: $1"; }
 
 install_gum(){
   command -v gum &> /dev/null || {
@@ -22,13 +21,13 @@ prompt_user(){
   gum format "### Egirlcatnip Fedora Setup ${VERSION}
 
 This installer will:
-1. Register VS Code, RPM Fusion & Terra repos
-2. Install missing core packages
+1. Register VS Code, RPM Fusion & Terra repositories
+2. Install any missing core packages
 3. Clone or update your dotfiles
-4. Switch default shell to Fish
-5. Apply final updates and cleanups
+4. Switch your default shell to Fish
+5. Run final update and cleanup steps
 "
-  gum confirm "Continue?" || { gum format "_Aborted._"; exit; }
+  gum confirm "Continue?" || { gum format "Aborted."; exit; }
 }
 
 add_repos(){
@@ -37,12 +36,19 @@ add_repos(){
 
   if [[ ! -f /etc/yum.repos.d/vscode.repo ]]; then
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-    echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm‑md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
+    echo -e "[code]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+autorefresh=1
+type=rpm-md
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
       | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null \
-      && success "VS Code repo added" \
-      || warn    "VS Code repo failed"
+      && success "VS Code repo added" \
+      || warn    "VS Code repo failed"
   else
-    success "VS Code repo exists"
+    success "VS Code repo exists"
   fi
 
   for repo in rpmfusion-free-release rpmfusion-nonfree-release; do
@@ -57,15 +63,13 @@ add_repos(){
     fi
   done
 
-  if [[ ! -f /etc/nobara-release ]]; then
-    if ! rpm -q terra-release &> /dev/null; then
-      sudo dnf install -y --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
-        --nogpgcheck terra-release > /dev/null 2>&1 \
-        && success "Terra repo added" \
-        || warn    "Terra repo failed"
-    else
-      success "Terra repo exists"
-    fi
+  if [[ ! -f /etc/nobara-release && ! rpm -q terra-release &> /dev/null ]]; then
+    sudo dnf install -y --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
+      --nogpgcheck terra-release > /dev/null 2>&1 \
+      && success "Terra repo added" \
+      || warn    "Terra repo failed"
+  else
+    success "Terra repo exists or not supported"
   fi
 }
 
@@ -91,7 +95,7 @@ install_dotfiles(){
     if ! git diff --quiet HEAD origin/main; then
       git reset --hard origin/main --quiet && success "Dotfiles updated" || warn "Update failed"
     else
-      success "Dotfiles up‑to‑date"
+      success "Dotfiles up-to-date"
     fi
   else
     git clone --quiet https://github.com/egirlcatnip/dotfiles ~/.dotfiles \
@@ -107,13 +111,13 @@ set_shell(){
   if [[ "$SHELL" != "/bin/fish" ]]; then
     sudo chsh -s /bin/fish "$USER" && sudo chsh -s /bin/fish root && success "Fish shell set"
   else
-    success "Fish is default"
+    success "Fish is default shell"
   fi
 }
 
 finalize(){
-  topgrade || warn "Topgrade issues"
-  fastfetch || warn "Fastfetch issues"
+  topgrade || warn "Topgrade encountered issues"
+  fastfetch || warn "Fastfetch encountered issues"
 }
 
 main(){
