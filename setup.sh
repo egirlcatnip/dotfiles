@@ -1,10 +1,10 @@
 #!/bin/bash
-# egirlcatscript v1.0.3
+# egirlcatscript fedora setup.sh
 # curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/refs/heads/main/setup.sh | sh
 
 set -euo pipefail
 
-VERSION="v1.0.3"
+VERSION="v1.0.4"
 
 log()        { gum format "## $1"; }
 success()    { gum format "OK: $1"; }
@@ -117,8 +117,8 @@ set_shell() {
 }
 
 finalize() {
-  topgrade -y || warn "Topgrade encountered issues"
-  fastfetch || warn "Fastfetch encountered issues"
+  topgrade -y
+  fastfetch
 }
 
 main() {
