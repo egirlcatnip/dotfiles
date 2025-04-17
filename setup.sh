@@ -52,10 +52,11 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
   fi
 
   for repo in rpmfusion-free-release rpmfusion-nonfree-release; do
-    if ! rpm -q $repo &> /dev/null; then
+    if ! rpm -q "$repo" &> /dev/null; then
       base=${repo%%-release}
-      sudo dnf install -y --repofrompath="${base},https://download1.rpmfusion.org/${base}/fedora/releases/${fedora}/Everything/${arch}/os/" \
-        --nogpgcheck $repo > /dev/null 2>&1 \
+      sudo dnf install -y \
+        --repofrompath="${base},https://download1.rpmfusion.org/${base}/fedora/releases/${fedora}/Everything/${arch}/os/" \
+        --nogpgcheck "$repo" > /dev/null 2>&1 \
         && success "$repo added" \
         || warn    "$repo failed"
     else
@@ -63,8 +64,10 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
     fi
   done
 
-  if [[ ! -f /etc/nobara-release && ! rpm -q terra-release &> /dev/null ]]; then
-    sudo dnf install -y --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
+  # Terra repo: only add if not Nobara and not already installed
+  if [[ ! -f /etc/nobara-release ]] && ! rpm -q terra-release &> /dev/null; then
+    sudo dnf install -y \
+      --repofrompath="terra,https://repos.fyralabs.com/terra${fedora}" \
       --nogpgcheck terra-release > /dev/null 2>&1 \
       && success "Terra repo added" \
       || warn    "Terra repo failed"
@@ -72,6 +75,7 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" \
     success "Terra repo exists or not supported"
   fi
 }
+
 
 install_packages(){
   core=(fish starship fastfetch micro btop topgrade tailscale ripgrep fd-find gh tealdeer rustup gdb)
