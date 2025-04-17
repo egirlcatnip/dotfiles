@@ -1,20 +1,20 @@
 #!/bin/bash
-# egirlcatscript v1.0.5
+# egirlcatscript v1.0.6
 # Run with: curl -sSL https://raw.githubusercontent.com/egirlcatnip/dotfiles/main/egirlcatscript.sh | bash
 
 set -euo pipefail
 
-VERSION="v1.0.5"
+VERSION="v1.0.6"
 
 log(){
   ts=$(date +"%T")
   msg="$1"
   width=${COLUMNS:-80}
-  prefix="── $ts - $msg "
+  prefix="-- $ts - $msg "
   prefix_len=${#prefix}
   if (( width>prefix_len )); then
     fill_len=$((width-prefix_len))
-    fill=$(printf '%*s' "$fill_len" '' | tr ' ' '─')
+    fill=$(printf '%*s' "$fill_len" '' | tr ' ' '-')
   else
     fill=""
   fi
