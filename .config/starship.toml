@@ -1,0 +1,81 @@
+# Starship lines, by @egirlcatnip
+
+"$schema" = "https://starship.rs/config-schema.json"
+
+format = """
+$username\
+$hostname\
+$shell\
+$cmd_duration\
+$line_break\
+$directory\
+$git_branch\
+$git_metrics\
+$time\
+$line_break\
+$character\
+"""
+
+add_newline = true
+command_timeout = 500
+
+[username]
+disabled = false
+format = "[$user](none)@"
+show_always = true
+
+[hostname]
+disabled = false
+format = "[$hostname](none) "
+ssh_only = false
+
+[shell]
+disabled = false
+format = "| [$indicator](none)"
+
+nu_indicator = "nush"
+bash_indicator = "bash"
+zsh_indicator = "zsh"
+fish_indicator = "fish"
+xonsh_indicator = "xonsh"
+
+cmd_indicator = "cmd"
+pwsh_indicator = "pwsh"
+
+unknown_indicator = "?"
+
+[cmd_duration]
+disabled = false
+format = " | [$duration]($style) "
+style = "bright-black"
+min_time = 2000
+show_milliseconds = false
+
+[directory]
+disabled = false
+format = "[$path]($style) "
+repo_root_format = "[$repo_root]($repo_root_style)[$path]($style) "
+read_only_style = "bright-red"
+style = "bright-blue"
+repo_root_style = "bold bright-yellow"
+truncate_to_repo = true
+use_logical_path = true
+use_os_path_sep = false
+truncation_length = 0
+
+[git_branch]
+disabled = false
+format = "on [$branch]($style) "
+ignore_branches = ["main"]
+
+[git_metrics]
+disabled = false
+format = '(\[(([+$added](green)) )([-$deleted](red))\]())'
+added_style = "green"
+deleted_style = "red"
+only_nonzero_diffs = true
+
+[character]
+disabled = false
+success_symbol = '''[\$](bold green)'''
+error_symbol = '''[\$](bold red)'''

@@ -1,0 +1,109 @@
+{
+    "window-size": {
+        "width": 960,
+        "height": 800
+    },
+    "window-maximized": false,
+    "window-position": {
+        "x": 480,
+        "y": 200
+    },
+    "url": "https://music.youtube.com",
+    "options": {
+        "tray": false,
+        "appVisible": true,
+        "autoUpdates": false,
+        "alwaysOnTop": false,
+        "hideMenu": true,
+        "hideMenuWarned": true,
+        "startAtLogin": false,
+        "disableHardwareAcceleration": false,
+        "removeUpgradeButton": true,
+        "restartOnConfigChanges": false,
+        "trayClickPlayPause": false,
+        "autoResetAppCache": false,
+        "resumeOnStart": true,
+        "likeButtons": "force",
+        "proxy": "",
+        "startingPage": "",
+        "overrideUserAgent": false,
+        "usePodcastParticipantAsArtist": false
+    },
+    "plugins": {
+        "notifications": {},
+        "video-toggle": {
+            "mode": "custom",
+            "enabled": false,
+            "hideVideo": false,
+            "forceHide": false,
+            "align": "left"
+        },
+        "precise-volume": {
+            "enabled": true,
+            "steps": 1,
+            "arrowsShortcut": false,
+            "globalShortcuts": {
+                "volumeUp": "",
+                "volumeDown": ""
+            },
+            "savedVolume": 100
+        },
+        "discord": {
+            "enabled": true,
+            "autoReconnect": true,
+            "activityTimeoutEnabled": true,
+            "activityTimeoutTime": 60000,
+            "playOnYouTubeMusic": true,
+            "hideGitHubButton": true,
+            "hideDurationLeft": false,
+            "listenAlong": true
+        },
+        "bypass-age-restrictions": {
+            "enabled": true
+        },
+        "ambient-mode": {
+            "enabled": true,
+            "quality": 1000,
+            "buffer": 30,
+            "interpolationTime": 1000,
+            "blur": 100,
+            "size": 110,
+            "opacity": 1,
+            "fullscreen": false
+        },
+        "album-color-theme": {
+            "enabled": false,
+            "ratio": 0.2
+        },
+        "compact-sidebar": {
+            "enabled": true
+        },
+        "shortcuts": {
+            "enabled": true
+        },
+        "album-actions": {
+            "enabled": false
+        },
+        "visualizer": {
+            "enabled": false
+        },
+        "exponential-volume": {
+            "enabled": true
+        },
+        "in-app-menu": {
+            "enabled": false
+        },
+        "adblocker": {
+            "enabled": true,
+            "cache": true,
+            "blocker": "With blocklists",
+            "additionalBlockLists": [],
+            "disableDefaultLists": false
+        }
+    },
+    "__internal__": {
+        "migrations": {
+            "version": "3.3.12"
+        }
+    }
+}

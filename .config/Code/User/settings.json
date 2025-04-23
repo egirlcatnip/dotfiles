@@ -1,0 +1,190 @@
+{
+  // ─── Editor Settings ──────────────────────────────────────────────────────────────
+  "editor.accessibilitySupport": "off",
+  "editor.codeLens": false,
+  "editor.cursorBlinking": "phase",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorSurroundingLines": 10,
+  "editor.cursorWidth": 2,
+  "editor.dragAndDrop": false,
+  "editor.foldingHighlight": false,
+  "editor.fontFamily": "AtkinsonHyperlegibleMono Nerd Font Mono",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.inlayHints.enabled": "off",
+  "editor.inlineSuggest.syntaxHighlightingEnabled": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.occurrencesHighlight": "off",
+  "editor.padding.bottom": 16,
+  "editor.padding.top": 16,
+  "editor.quickSuggestionsDelay": 0,
+  "editor.renderLineHighlight": "none",
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.horizontalScrollbarSize": 0,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.verticalScrollbarSize": 0,
+  "editor.suggest.matchOnWordStartOnly": false,
+  "editor.suggest.preview": true,
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.wrappingStrategy": "advanced",
+  "editor.mouseWheelZoom": true,
+  "editor.semanticTokenColorCustomizations": {
+    "enabled": true
+  },
+  // ─── Explorer Settings ─────────────────────────────────────────────────────────────
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+  "explorer.sortOrder": "type",
+  "explorer.copyRelativePathSeparator": "/",
+  "explorer.fileNesting.enabled": true,
+  // ─── Files Settings ────────────────────────────────────────────────────────────────
+  "files.associations": {
+    "CompilerExplorer": "asm-intel-x86-generic",
+    ".clang-format": "json",
+    "*.h": "c"
+  },
+  "files.readonlyFromPermissions": true,
+  "files.trimTrailingWhitespace": true,
+  // ─── Git & GitHub Settings ─────────────────────────────────────────────────────────
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "always",
+  "git.autofetch": true,
+  "github.copilot.advanced": {
+    "authProvider": "github"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  // ─── Security & Privacy Settings ───────────────────────────────────────────────────
+  "security.workspace.trust.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  // ─── Terminal Settings ────────────────────────────────────────────────────────────
+  "terminal.integrated.commandsToSkipShell": [
+    "code-runner.run",
+    "workbench.action.decreaseViewSize",
+    "workbench.action.increaseViewSize",
+    "workbench.action.terminal.resizePaneUp",
+    "workbench.action.terminal.resizePaneDown"
+  ],
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorStyleInactive": "none",
+  "terminal.integrated.cursorWidth": 2,
+  "terminal.integrated.wordSeparators": " ()[]{}',`─‘’“”|_",
+  "terminal.integrated.scrollback": 2000,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.initialHint": false,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.profiles.linux": {
+    "nu": {
+      "path": "nu",
+      "icon": "terminal-bash"
+    }
+  },
+  // ─── Update & Extension Settings ───────────────────────────────────────────────────
+  "update.mode": "none",
+  "update.showReleaseNotes": false,
+  "lldb.showDisassembly": "never",
+  // ─── Window Settings ──────────────────────────────────────────────────────────────
+  "window.autoDetectColorScheme": true,
+  "window.customTitleBarVisibility": "auto",
+  "window.dialogStyle": "custom",
+  "window.menuBarVisibility": "toggle",
+  "window.newWindowDimensions": "maximized",
+  "window.zoomPerWindow": false,
+  "window.commandCenter": false,
+  // ─── Workbench Settings ───────────────────────────────────────────────────────────
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.enableExperiments": false,
+  "workbench.iconTheme": "chalice-icon-theme",
+  "workbench.list.smoothScrolling": true,
+  "workbench.colorTheme": "Adwaita Dark & Github syntax highlighting",
+  "workbench.preferredLightColorTheme": "Adwaita Light & Github syntax highlighting",
+  "workbench.preferredDarkColorTheme": "Adwaita Dark & Github syntax highlighting",
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "workbench.commandPalette.experimental.askChatLocation": "quickChat",
+  "workbench.commandPalette.experimental.suggestCommands": true,
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.highlightModifiedTabs": true,
+  // ─── Debugging Settings ───────────────────────────────────────────────────────────
+  "debug.internalConsoleOptions": "neverOpen",
+  "debug.onTaskErrors": "abort",
+  "debug.toolBarLocation": "hidden",
+  "debug.showVariableTypes": true,
+  "debug.focusWindowOnBreak": false,
+  "debug.focusEditorOnBreak": false,
+  // ─── Error Lens Settings ──────────────────────────────────────────────────────────
+  "errorLens.messageBackgroundMode": "message",
+  "errorLens.messageEnabled": true,
+  "errorLens.statusBarIconsEnabled": true,
+  // ─── Hex Editor Settings ──────────────────────────────────────────────────────────
+  "hexeditor.columnWidth": 16,
+  "hexeditor.showDecodedText": true,
+  "hexeditor.defaultEndianness": "little",
+  "hexeditor.inspectorType": "aside",
+  // ─── Task Settings ────────────────────────────────────────────────────────────────
+  "task.autoDetect": "off",
+  // ─── File-Specific ────────────────────────────────────────────────────────────────
+  // ─── Zen mode ─────────────────────────────────────────────────────────────────────
+  "zenMode.centerLayout": false,
+  "zenMode.showTabs": "none",
+  // ─── Miscellaneous Settings ───────────────────────────────────────────────────────
+  "breadcrumbs.enabled": false,
+  "breadcrumbs.icons": false,
+  "editor.bracketPairColorization.enabled": false,
+  "terminal.integrated.shellIntegration.enabled": false,
+  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
+  "[html]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.wait": 10,
+  "deno.enable": true,
+  "deno.path": "/home/egirlcatnip/.cargo/bin/deno",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "files.insertFinalNewline": true,
+  "terminal.integrated.fontSize": 16,
+  "workbench.panel.showLabels": false,
+  "editor.minimap.autohide": true,
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "{hexdiff}:/**/*.*": "hexEditor.hexedit",
+    "{git,gitlens,git-graph}:/**/*.{md,csv,svg}": "default"
+  },
+  "zenMode.fullScreen": false,
+  "window.restoreFullscreen": true,
+  "workbench.secondarySideBar.showLabels": false,
+  "window.titleBarStyle": "native",
+  "remote.SSH.remotePlatform": {
+    "raspberry_pi": "linux",
+    "raspberry_pi2": "linux",
+    "raspberrypi.tail1c7505.ts.net": "linux"
+  },
+  "settingsSync.ignoredSettings": [
+    "deno.path"
+  ],
+  "window.titleSeparator": " | ",
+  "window.title": "${remoteName}${separator}${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}",
+  "asm-code-lens.hexCalculator.showInExplorer": false,
+  "asm-code-lens.hexCalculator.showInDebug": false,
+  "asm-code-lens.donated": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "[css]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "lldb.suppressUpdateNotifications": true,
+  "window.zoomLevel": 1,
+}

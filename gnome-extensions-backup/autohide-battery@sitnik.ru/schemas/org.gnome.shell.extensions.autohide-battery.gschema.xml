@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.autohide-battery" path="/org/gnome/shell/extensions/autohide-battery/">
+    <key name="hide-on" type="i">
+      <summary>Minimum battery level to hide icon</summary>
+      <default>100</default>
+    </key>
+    <key name="hide-always" type="b">
+      <summary>Hide icon on any battery state</summary>
+      <default>false</default>
+    </key>
+  </schema>
+</schemalist>

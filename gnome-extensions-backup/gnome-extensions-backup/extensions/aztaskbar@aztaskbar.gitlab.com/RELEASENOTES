@@ -1,0 +1,12 @@
+<b><span size="large">Version 28 (2025-03-04)</span></b>
+
+• AppMenu: Show app window menu items based on isolate workspaces/monitors.
+• AppIcon: Add all click options to Left Click.
+• AppIcon: Fix bug incorrectly marking app icon as a favorite.
+• Add option to Always Show Notification Badges.
+• Add option to Hide Dash.
+• Add GNOME 48 support.
+• Add notification to show new release info.
+    - Can be turned off in settings.
+• Add Donate Page to settings.
+• Add What's New section to About Page in settings.

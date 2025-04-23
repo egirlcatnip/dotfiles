@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions-gravatar">
+    <schema id="org.gnome.shell.extensions.gravatar" path="/org/gnome/shell/extensions/gravatar/">
+        <key name="debug" type="b">
+            <default>false</default>
+            <summary>Debug Mode</summary>
+            <description>Enable debug mode.</description>
+        </key>
+        <key name="notifications" type="b">
+            <default>false</default>
+            <summary>Notifications</summary>
+            <description>Show desktop notifications.</description>
+        </key>
+        <key name="email" type="s">
+            <default>""</default>
+            <summary>Email</summary>
+            <description>Your email address.</description>
+        </key>
+        <key name="gravatar-ondemand-keybinding" type="as">
+            <default><![CDATA[['<Ctrl><Super>g']]]></default>
+            <summary>Keyboard Shortcut</summary>
+            <description>Keyboard Shortcut Keybinding</description>
+        </key>
+        <key name="icon-size" type="i">
+            <default>192</default>
+            <summary>Icon Size</summary>
+            <description>Size of icon to download.</description>
+        </key>
+        <key name="service" type="s">
+            <default>"gravatar"</default>
+            <summary>Avatar Service</summary>
+        </key>
+        <key name="prefs-default-width" type="d">
+            <default>700</default>
+            <summary>Default width for the preferences window</summary>
+        </key>
+        <key name="prefs-default-height" type="d">
+            <default>600</default>
+            <summary>Default height for the preferences window</summary>
+        </key>
+    </schema>
+</schemalist>
