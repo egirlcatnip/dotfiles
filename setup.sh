@@ -53,7 +53,7 @@ apply_dotfiles() {
   log "$INFO" "Downloading dotfiles to $DOTDIR"
 
   if [[ -d $DOTDIR ]]; then
-    git -C "$DOTDIR" pull -f || log "$WARN" "Dotfiles update failed"
+    git -C "$DOTDIR" pull -f --ff-only || log "$WARN" "Dotfiles update failed"
   else
     git clone https://github.com/egirlcatnip/dotfiles "$DOTDIR" || log "$WARN" "Clone failed"
   fi
